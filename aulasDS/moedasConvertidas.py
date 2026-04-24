@@ -1,18 +1,34 @@
 import requests
 
+# 1. Definição do link e requisição
 link = "https://economia.awesomeapi.com.br/last/USD-BRL,ARS-BRL,ETH-BRL"
-
-# 2. requisao e transformacao
 requisicao = requests.get(link)
 dicMoedas = requisicao.json()
 
+# 2. Menu de opções para o usuário
+print("=== CONSULTA DE COTAÇÕES ===")
+print("Escolha uma opção:")
+print("1 - Dólar Americano")
+print("2 - Peso Argentino")
+print("3 - Ethereum")
 
-valor_dolar = dicMoedas['USDBRL']['bid']
-valor_peso = dicMoedas['ARSBRL']['bid']
-valor_ethereum = dicMoedas['ETHBRL']['bid']
+opcao = input("Digite o número da moeda desejada: ")
 
-# 4. exbicao do resultadp
-print("=== COTAÇÕES DE HOJE ===")
-print(f"Valor do Dólar americano hoje: R$ {valor_dolar}")
-print(f"Valor do Peso argentino hoje: R$ {valor_peso}")
-print(f"Valor do Ethereum hoje: R$ {valor_ethereum}")
+# 3. Lógica de exibição baseada na escolha
+if opcao == '1':
+    nome = dicMoedas['USDBRL']['name']
+    valor = dicMoedas['USDBRL']['bid']
+    print(f"A cotação do {nome} é: R$ {valor}")
+
+elif opcao == '2':
+    nome = dicMoedas['ARSBRL']['name']
+    valor = dicMoedas['ARSBRL']['bid']
+    print(f"A cotação do {nome} é: R$ {valor}")
+
+elif opcao == '3':
+    nome = dicMoedas['ETHBRL']['name']
+    valor = dicMoedas['ETHBRL']['bid']
+    print(f"A cotação do {nome} é: R$ {valor}")
+
+else:
+    print("Opção inválida! Tente novamente.")
